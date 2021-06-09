@@ -86,4 +86,29 @@ empDailyHrsMap.forEach( (values , key ,map) => {
 });
 console.log("Full Working Days: " +fullWorkingDays);
 console.log("Part Working Days: " +partWorkingDays);
-console.log("Non Working Days: " +nonWorkingDays);                
+console.log("Non Working Days: " +nonWorkingDays);  
+
+/**UC 11A to 11D Using Object Function along with Arrow Functions */
+
+let totalWages = empDailyHrsAndWageArr
+                 .filter (dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                 .reduce((totalWage, dailyHrsAndWage) => totalWage += dailyHrsAndWage.dailyWage,0);
+
+let totalHours = empDailyHrsAndWageArr
+                 .filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                 .reduce((totalHours,dailyHrsAndWage) => totalHours += dailyHrsAndWage.dailyHours ,0);
+console.log("UC 11A Total Hours: "+totalHours+ " Total Wages: "+totalWages);     
+
+Process.stdout.write("UC 11B Logging Full Work Days")
+empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage == 8)
+                     .forEach(dailyHrsAndWage => Process.stdout.write(dailyHrsAndWage.toString()));
+  
+let partWorkingDaysStrArr = empDailyHrsAndWageArr
+                            .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4)
+                            .map(dailyHrsAndWage => dailyHrsAndWage.toString());
+console.log("\n UC 11C PartWorkingDayStrings: "+ partWorkingDaysStrArr);
+
+let nonWorkingDayNums = empDailyHrsAndWageArr
+                        .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours ==0)
+                        .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+console.log("Uc 11D NonWorkingDayNums: "+nonWorkingDayNums);      
